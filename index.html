@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather.report</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="backgroundContainer">
+        <img src="/images/backgrounds/cloudy.jpg" alt="background" id="backgroundIMG">
+    </div>
+    <div class="left">
+        <div class="titleholder">
+            <h1>weather.report</h1>
+        </div>
+        <div class="information-container">
+            <div class="location-container">
+                <h1 id="locationData">TOKYO, JAPAN</h1>
+            </div>
+            <div class="manythings-container">
+                <div class="temperature-container">
+                    <h1 id="temperatureData">31°</h1>
+                </div>
+                <div class="timeandlocation-container">
+                    <h2 id="timezone">17:30 UTC +7</h2>
+                    <h1 id="condition">Clear Day</h1>
+                    <h3 id="feelsLike">feels like 28°</h3>
+                </div>
+                <div class="icon-container">
+                    <img src="images/icons/cloudy.svg" alt="weatherIcon" id="weatherIcon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="searchbar-container">
+            <label for="inputLocation">search</label>
+            <input type="text" name="searchbar" id="inputLocation" placeholder="Where do we go?">
+        </div>
+        <div class="presetLocations">
+            <a href="#">Tokyo</a>
+            <a href="#">New York</a>
+            <a href="#">Mandaue</a>
+        </div>
+    </div>
+    <script src="js.js"></script>
+</body>
+</html>
