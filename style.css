@@ -1,6 +1,13 @@
 *{
     margin: 0;
+    opacity: 1;
+    transition: opacity 0.3s ease, blur 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease, blur 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease, blur 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease, blur 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease, blur 0.3s ease-in-out;
     font-family: "Work Sans", sans-serif;
+    filter: blur(0px);
 }
 body{
     height: 100vh;
@@ -118,6 +125,7 @@ body div{
     height: 100%;
     width: 33%;
     flex-direction: column;
+    align-items: center;
 }
 .searchbar-container{
     width: 100%;
@@ -146,12 +154,20 @@ body div{
 #inputLocation:focus{
     outline: none;
 }
-
+.error-container{
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
+}
+.error-container h1{
+    opacity: 0;
+    color: rgb(221, 40, 40);
+    font-weight: 300;
+}
 .presetLocations{
     flex-direction: column;
     width: 100%;
     height: auto;
-    padding-top: 5%;
     align-items: center;
 }
 .presetLocations a{
@@ -169,4 +185,100 @@ body div{
     background-color: black;
     color: white;
     transition: all 0.3s ease;
+}
+
+.additional-information{
+    border-top: 4px solid white;
+    width: 90%;
+    padding-top: 8%;
+    height: 30vh;
+    align-items: end;
+    justify-content: center;
+}
+.next-day-container{
+    flex-direction: column;
+    width: 41%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+#next-day-conditionIcon{
+    width: 67%;
+    height: auto;
+    filter: invert(1);
+}
+#next-day-temp{
+    color: white;
+    font-weight: 400;
+    font-size: 1.9em;
+}
+#next-day-condition{
+    font-weight: 300;
+    font-size: 3em;
+    color: white;
+}
+.next-day-container small{
+    color: white;
+    font-size: 1em;
+}
+
+.wind-and-lunar-container{
+    width: 59%;
+    height: 100%;
+    flex-direction: column;
+}
+.wind-container{
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    border-bottom: 4px solid white;
+}
+#wind-icon{
+    height: 63%;
+    width: auto;
+    filter: invert(1);
+}
+#wind-speed{
+    color: white;
+    font-weight: 300;
+    font-size: 3.5em;
+    margin-right: 13px;
+    margin-left: 9px;
+}
+#wind-direction{
+    color: white;
+    font-size: 1em;
+}
+.lunar-container{
+    height: 50%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#moon-icon{
+    height: 46%;
+    width: auto;
+    filter: invert(1);
+}
+#moon-condition{
+    font-weight: 400;
+    color: white;
+    text-align: end;
+}
+
+
+#errorMessage.fade{
+    opacity: 1;
+}
+#locationData.fade,
+#temperatureData.fade,
+#timezone.fade,
+#condition.fade,
+#feelsLike.fade,
+#weatherIcon.fade{
+    opacity: 0;
+    filter: blur(3px);
 }

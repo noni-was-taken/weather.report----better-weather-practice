@@ -20,19 +20,19 @@
         </div>
         <div class="information-container">
             <div class="location-container">
-                <h1 id="locationData">TOKYO, JAPAN</h1>
+                <h1 id="locationData"></h1>
             </div>
             <div class="manythings-container">
                 <div class="temperature-container">
-                    <h1 id="temperatureData">31°</h1>
+                    <h1 id="temperatureData"></h1>
                 </div>
                 <div class="timeandlocation-container">
-                    <h2 id="timezone">17:30 UTC +7</h2>
-                    <h1 id="condition">Clear Day</h1>
-                    <h3 id="feelsLike">feels like 28°</h3>
+                    <h2 id="timezone"></h2>
+                    <h1 id="condition"></h1>
+                    <h3 id="feelsLike"></h3>
                 </div>
                 <div class="icon-container">
-                    <img src="images/icons/cloudy.svg" alt="weatherIcon" id="weatherIcon">
+                    <img src="" alt="weatherIcon" id="weatherIcon" style="display: none;">
                 </div>
             </div>
         </div>
@@ -42,10 +42,34 @@
             <label for="inputLocation">search</label>
             <input type="text" name="searchbar" id="inputLocation" placeholder="Where do we go?">
         </div>
+        <div class="error-container">
+            <h1 id="errorMessage">
+                couldn't find location
+            </h1>
+        </div>
         <div class="presetLocations">
-            <a href="#">Tokyo</a>
-            <a href="#">New York</a>
-            <a href="#">Mandaue</a>
+            <a href="#" onclick="display('Tokyo')">Tokyo</a>
+            <a href="#" onclick="display('New York')">New York</a>
+            <a href="#" onclick="display('Mandaue')">Mandaue</a>
+        </div>
+        <div class="additional-information">
+            <div class="next-day-container">
+                <h1 id="next-day-temp">31°</h1>
+                <img src="/images/icons/clear-day.svg" alt="next-day-condition" id="next-day-conditionIcon">
+                <h1 id="next-day-condition">Clear</h1>
+                <small>tmrw.</small>
+            </div>
+            <div class="wind-and-lunar-container">
+                <div class="wind-container">
+                    <img src="/images/icons/wind-direction.svg" alt="wind-icon" id="wind-icon">
+                    <h1 id="wind-speed">10m/h</h1>
+                    <h1 id="wind-direction">NW</h1>
+                </div>
+                <div class="lunar-container">
+                    <img src="images/icons/lunar-icons/waxing-crescent.svg" alt="moon-icon" id="moon-icon">
+                    <h1 id="moon-condition">Waxing crescent</h1>
+                </div>
+            </div>
         </div>
     </div>
     <script src="js.js"></script>
