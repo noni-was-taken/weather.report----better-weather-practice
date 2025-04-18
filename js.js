@@ -23,7 +23,7 @@ async function getData(location){
 };
 
 document.addEventListener("DOMContentLoaded", async (event) => {
-    //display('tokyo');
+    display('tokyo');
 });
 
 searchBar.addEventListener('keydown', function(event){
@@ -46,11 +46,8 @@ async function display(location){
             const hourly = data.days[0].hours;
             const currentHour = hourly.find(h =>{
                 const apiTime = h.datetimeEpoch;
-                console.log(apiTime);
-                console.log(hour);
                 return Math.abs(apiTime - hour) <= 1800; 
             }) || hourly[0];
-            console.log(currentHour);
 
             var date = new Date();
             var dateFormat = new Intl.DateTimeFormat("en-US", {
@@ -71,7 +68,8 @@ async function display(location){
             document.getElementById(`feelsLike`).textContent = `feels like ${Math.ceil((currentHour.feelslike-32)*5/9)}°`;
             document.getElementById(`weatherIcon`).setAttribute('src', `images/icons/${currentHour.icon}.svg`);
             document.getElementById(`weatherIcon`).setAttribute('style', `display: block`);
-            
+            document.getElementById(`backgroundIMG`).setAttribute(`src`, `/images/backgrounds/${currentHour.icon}.png`)
+
             if(fine)toggleFade();
             previousLocation = location;
         }
@@ -89,6 +87,15 @@ function toggleFade(){
         document.getElementById(`condition`),
         document.getElementById(`feelsLike`),
         document.getElementById(`weatherIcon`),
+        document.getElementById(`wind-icon`),
+        document.getElementById(`wind-speed`),
+        document.getElementById(`wind-direction`),
+        document.getElementById(`moon-icon`),
+        document.getElementById(`moon-condition`),
+        document.getElementById(`next-day-conditionIcon`),
+        document.getElementById(`next-day-temp`),
+        document.getElementById(`next-day-condition`),
+        document.getElementById(`backgroundIMG`)
     ]
     elements.forEach((element, inx) => {
         element.classList.toggle('fade');
@@ -138,4 +145,47 @@ function displayAdditional(data){
         default:
             console.log(`invalid direction`);
     }
+
+    const moonStat = data.days[1].moonphase;
+    const moonDescription = document.getElementById(`moon-condition`);
+    console.log(moonStat);
+    var moonCondition;
+    switch(true){
+        case (moonStat === 0):
+            moonCondition = 'new-moon';
+            moonDescription.textContent = `New Moon`;
+            break; 
+        case (moonStat < 0.25 && moonStat > 0):
+            moonCondition = 'waxing-crescent';
+            moonDescription.textContent = `Waxing Crescent`;
+            break;
+        case (moonStat === 0.25):
+            moonCondition = 'first-quarter';
+            moonDescription.textContent = `First Quarter`;
+            break;
+        case (moonStat < 0.50 && moonStat > 0.25):
+            moonCondition = 'waxing-gibbous';
+            moonDescription.textContent = `Waxing Gibbous`;
+            break;
+        case (moonStat === 0.50):
+            moonCondition = 'full-moon';
+            moonDescription.textContent = `Full Moon`;
+            break;
+        case (moonStat < 0.75 && moonStat > 0.50):
+            moonCondition = 'waning-gibbous';
+            moonDescription.textContent = `Waning Gibbous`;
+            break;
+        case (moonStat === 0.75):
+            moonCondition = 'last-quarter';
+            moonDescription.textContent = `Last Quarter`;
+            break;
+        case (moonStat < 1 && moonStat > 0.75):
+            moonCondition = 'waning-crescent';
+            moonDescription.textContent = `Waning Crescent`;
+            break;
+        default:
+            console.log(`invalid moon phase`);
+    }
+    console.log(moonCondition);
+    document.getElementById(`moon-icon`).setAttribute('src', `images/icons/lunar-icons/${moonCondition}.svg`)
 }

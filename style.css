@@ -13,6 +13,7 @@ body{
     height: 100vh;
     width: 100%;
     display: flex;
+    background-color: black;
 }
 body div{
     display: flex;
@@ -26,7 +27,7 @@ body div{
 #backgroundIMG{
     height: 100%;
     width: 100%;
-    filter: brightness(80%);
+    filter: brightness(70%);
 }
 .left{
     position: relative;
@@ -189,15 +190,15 @@ body div{
 
 .additional-information{
     border-top: 4px solid white;
-    width: 90%;
+    width: 95%;
     padding-top: 8%;
     height: 30vh;
     align-items: end;
-    justify-content: center;
+    justify-content: space-between;
 }
 .next-day-container{
     flex-direction: column;
-    width: 41%;
+    width: 38%;
     height: 100%;
     align-items: center;
     justify-content: center;
@@ -210,12 +211,13 @@ body div{
 }
 #next-day-temp{
     color: white;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 1.9em;
 }
 #next-day-condition{
-    font-weight: 300;
-    font-size: 3em;
+    font-weight: 500;
+    font-size: 2.7em;
+    text-align: center;
     color: white;
 }
 .next-day-container small{
@@ -224,7 +226,7 @@ body div{
 }
 
 .wind-and-lunar-container{
-    width: 59%;
+    width: 58%;
     height: 100%;
     flex-direction: column;
 }
@@ -264,7 +266,7 @@ body div{
     filter: invert(1);
 }
 #moon-condition{
-    font-weight: 400;
+    font-weight: 600;
     color: white;
     text-align: end;
 }
@@ -273,6 +275,15 @@ body div{
 #errorMessage.fade{
     opacity: 1;
 }
+
+#wind-icon.fade,
+#wind-speed.fade,
+#wind-direction.fade,
+#moon-icon.fade,
+#moon-condition.fade,
+#next-day-conditionIcon.fade,
+#next-day-temp.fade,
+#next-day-condition.fade,
 #locationData.fade,
 #temperatureData.fade,
 #timezone.fade,
@@ -281,4 +292,9 @@ body div{
 #weatherIcon.fade{
     opacity: 0;
     filter: blur(3px);
+}
+
+#backgroundIMG.fade{
+    opacity: 0;
+    transition: opacity 0.1s ease;
 }
