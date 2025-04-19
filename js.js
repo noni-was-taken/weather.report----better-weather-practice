@@ -22,16 +22,11 @@ async function getData(location){
     }
 };
 
-document.addEventListener("DOMContentLoaded", async (event) => {
-    display('tokyo');
-});
-
 searchBar.addEventListener('keydown', function(event){
     if(event.key == 'Enter'){
         display(searchBar.value);
     }
 });
-
 
 async function display(location){
     try{
@@ -39,45 +34,47 @@ async function display(location){
             console.log('locationAlready Displayed');    
         }else{
             if(fine)toggleFade();
-
             data = await getData(location);
-            displayAdditional(data);
-            const hour = epochHour();
-            const hourly = data.days[0].hours;
-            const currentHour = hourly.find(h =>{
+            if(!data){
+                console.log(`Data wasn't reached, display aborted`);
+            }else{
+                displayAdditional(data);
+                const hour = epochHour();
+                const hourly = data.days[0].hours;
+                const currentHour = hourly.find(h =>{
                 const apiTime = h.datetimeEpoch;
                 return Math.abs(apiTime - hour) <= 1800; 
-            }) || hourly[0];
-
-            var date = new Date();
-            var dateFormat = new Intl.DateTimeFormat("en-US", {
-                timeZone: `${data.timezone}`,
-                timeZoneName: "short"
-            });
-            
-            const currentTime = dateFormat.format(date);
-        
-        
-            if(document.getElementById(`errorMessage`).classList.contains('fade')){
-                document.getElementById(`errorMessage`).classList.toggle('fade');
+                }) || hourly[0];
+                
+                var date = new Date();
+                var dateFormat = new Intl.DateTimeFormat("en-US", {
+                    timeZone: `${data.timezone}`,
+                    timeZoneName: "short"
+                });
+                
+                const currentTime = dateFormat.format(date);
+                
+                
+                if(document.getElementById(`errorMessage`).classList.contains('fade')){
+                    document.getElementById(`errorMessage`).classList.toggle('fade');
+                }
+                document.getElementById(`locationData`).textContent = data.resolvedAddress.toUpperCase();
+                document.getElementById(`temperatureData`).textContent = `${Math.ceil((currentHour.temp-32)*5/9)}°`;
+                document.getElementById(`timezone`).innerHTML = `${currentHour.datetime} <br> ${currentTime}`;
+                document.getElementById(`condition`).textContent = currentHour.conditions;
+                document.getElementById(`feelsLike`).textContent = `feels like ${Math.ceil((currentHour.feelslike-32)*5/9)}°`;
+                document.getElementById(`weatherIcon`).setAttribute('src', `images/icons/${currentHour.icon}.svg`);
+                document.getElementById(`weatherIcon`).setAttribute('style', `display: block`);
+                document.getElementById(`backgroundIMG`).setAttribute(`src`, `/images/backgrounds/${currentHour.icon}.png`)
+                
+                if(fine)toggleFade();
+                previousLocation = location;
             }
-            document.getElementById(`locationData`).textContent = data.resolvedAddress.toUpperCase();
-            document.getElementById(`temperatureData`).textContent = `${Math.ceil((currentHour.temp-32)*5/9)}°`;
-            document.getElementById(`timezone`).innerHTML = `${currentHour.datetime} <br> ${currentTime}`;
-            document.getElementById(`condition`).textContent = currentHour.conditions;
-            document.getElementById(`feelsLike`).textContent = `feels like ${Math.ceil((currentHour.feelslike-32)*5/9)}°`;
-            document.getElementById(`weatherIcon`).setAttribute('src', `images/icons/${currentHour.icon}.svg`);
-            document.getElementById(`weatherIcon`).setAttribute('style', `display: block`);
-            document.getElementById(`backgroundIMG`).setAttribute(`src`, `/images/backgrounds/${currentHour.icon}.png`)
-
-            if(fine)toggleFade();
-            previousLocation = location;
         }
     } catch(error) {
         console.log('Error in Display');
     }
 }
-
 function toggleFade(){
     console.log("Toggling fade...");
     let elements = [
@@ -101,12 +98,10 @@ function toggleFade(){
         element.classList.toggle('fade');
     });
 }
-
 function epochHour(){
     const now = new Date();
     return Math.floor(now.getTime() / 1000);
 }
-
 function displayAdditional(data){
     //tomorrow data
     document.getElementById(`next-day-temp`).textContent = `${Math.ceil((data.days[1].temp-32)*5/9)}°`;
@@ -188,4 +183,19 @@ function displayAdditional(data){
     }
     console.log(moonCondition);
     document.getElementById(`moon-icon`).setAttribute('src', `images/icons/lunar-icons/${moonCondition}.svg`)
+}
+
+document.addEventListener("DOMContentLoaded", async (event) => {
+    display('tokyo');
+});
+
+function toggleSearch(){
+    const right = document.querySelector(`.right`)
+    right.classList.add('fade');
+    setTimeout(() => {
+        right.classList.toggle('miniDisplay');
+        setTimeout(() => {
+            right.classList.remove('fade');
+        }, 10);
+    }, 100);
 }

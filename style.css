@@ -28,6 +28,8 @@ body div{
     height: 100%;
     width: 100%;
     filter: brightness(70%);
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .left{
     position: relative;
@@ -41,7 +43,6 @@ body div{
     width: 100%;
     height: 13vh;
     align-items: end;
-    padding-left: 40px;
     gap: 1%;
 }
 .titleholder h1{
@@ -49,14 +50,16 @@ body div{
     color: white;
     font-weight: 500;
     font-size: 1.4em;
+    margin-left: 3%;
 }
 .titleholder img{
     height: 43px;
     width: auto;
 }
 .information-container{
-    height: 25vh;
+    height: 29vh;
     justify-content: space-between;
+    margin-bottom: 3%;    
 }
 .location-container{
     height: 94%;      
@@ -77,14 +80,15 @@ body div{
 }
 .icon-container{
     height: 100%;
-    width: 49%;
+    width: 20vh;
     align-items: center;
+    margin-right: 10%;
 }
 
 .icon-container img{
     filter: invert(1);
-    height: 4.2vh;
-    width: auto;
+    height: auto;
+    width: 100%;
 }
 .temperature-container{
     align-items: center;
@@ -96,7 +100,7 @@ body div{
 }
 .timeandlocation-container{
     height: 100%;
-    width: 65%;
+    width: 36%;
     color:  white;
     flex-direction: column;
     justify-content: center;
@@ -216,7 +220,7 @@ body div{
 }
 #next-day-condition{
     font-weight: 500;
-    font-size: 2.7em;
+    font-size: 2em;
     text-align: center;
     color: white;
 }
@@ -246,13 +250,13 @@ body div{
 #wind-speed{
     color: white;
     font-weight: 300;
-    font-size: 3.3em;
+    font-size: 2.6em;
     margin-right: 13px;
     margin-left: 9px;
 }
 #wind-direction{
     color: white;
-    font-size: 1em;
+    font-size: 1.3em;
 }
 .lunar-container{
     height: 50%;
@@ -266,16 +270,16 @@ body div{
     filter: invert(1);
 }
 #moon-condition{
+    font-size: 2em;
     font-weight: 600;
     color: white;
     text-align: end;
 }
-
-
 #errorMessage.fade{
     opacity: 1;
 }
 
+.right.fade,
 #wind-icon.fade,
 #wind-speed.fade,
 #wind-direction.fade,
@@ -293,8 +297,86 @@ body div{
     opacity: 0;
     filter: blur(3px);
 }
-
 #backgroundIMG.fade{
     opacity: 0;
     transition: opacity 0.1s ease;
 }
+.tab-button{
+    display: none;
+}
+
+@media (max-width: 1900px){
+    .tab-max{
+        display: none;
+    }
+    .right{
+        display: none;
+    }
+    .right.miniDisplay{
+        justify-content: start;
+        display: flex;
+        position: absolute;
+        height: 36vh;
+        width: 75vh;
+        z-index: 20;
+        top: 20%;
+        left: 50%;
+        margin-left: -39.5vh;
+    }
+    .right.miniDisplay .searchbar-container{
+        height: 20%;
+    }
+    .right.miniDisplay .error-container{
+        height: 10%;
+    }
+    .right.miniDisplay .searchbar-container label{
+        font-size: 2em;
+    }
+    .right.miniDisplay #inputLocation{
+        font-size: 1.9em;
+    }
+    .right.miniDisplay .presetLocations{
+        display: none;
+    }
+    .right.miniDisplay .additional-information{
+        display: flex;
+        border-top: none;
+        height: 70%;
+        padding: 0;
+    }
+    .right.miniDisplay .wind-container{
+        border-bottom: 1px solid white;
+    }
+    .right.miniDisplay #next-day-conditionIcon{
+        height: 24%;
+    }
+    .left{
+        width: 100%;
+    }
+    .tab-button{
+        right: 4%;
+        top: 9%;
+        background-color: rgba(0, 0, 0, 0.276);
+        z-index: 20;
+        position: absolute;
+        display: flex;
+        height: 5vh;
+        width: 6vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20%;
+        cursor: pointer;
+    }
+    .tab-button:hover{
+        background-color: black;
+        transform: scale(1.2);
+        transition: background-color 0.5s ease, transform 0.5s ease;
+    }
+    .tab-button div{
+        background-color: white;
+        width: 63%;
+        height: 2px;
+    }
+}
+
